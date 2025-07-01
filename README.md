@@ -1,6 +1,6 @@
 # Research Paper Q&A System
 
-This repository provides a system for automating extracting information from research papers and answering questions based on their content. It leverages vector embeddings and a Qdrant vector database for efficient information retrieval, combined with a summarization agent powered by Google Gemini to generate concise answers.
+This repository provides a system for extracting information from research papers and answering questions based on their content. It leverages vector embeddings and a Qdrant vector database for efficient information retrieval, combined with a summarization agent to generate concise answers. This system was developed to assist in the process of writing a systematic literature review thesis.
 
 ---
 

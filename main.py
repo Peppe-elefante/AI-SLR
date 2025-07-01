@@ -43,7 +43,7 @@ def main():
             answers.append(embeddings_dict.get(point.id)[1])
         agent_data = agent_data | {"answers" : answers}
         with open("output.txt", "a", encoding="utf-8") as f:
-            f.write(agent.ask_question(agent_data) + "\n\nQuestion: "+ question +"\n\n")
+            f.write("\n\nQuestion: "+ question +"\n\n" + agent.ask_question(agent_data))
         
 
     db.clear_db()

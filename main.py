@@ -6,7 +6,7 @@ from fastembed import TextEmbedding
 from utils.questions import questions
 import logging
 from dotenv import load_dotenv
-import json
+
 
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
@@ -22,11 +22,10 @@ def get_studies():
     return studies
 
 
-def main():
+def main(db: Qdrant):
     embeddings_dict: dict = {} 
     studies: list[StudyPDF] = get_studies()
     model = TextEmbedding(model_name="sentence-transformers/all-MiniLM-L6-v2")
-    db = Qdrant()
     agent = SummaryAgent()
     for study in studies:
         embeddings_study = study.return_embeddings(model)
@@ -46,7 +45,13 @@ def main():
             f.write("\n\nQuestion: "+ question +"\n\n" + agent.ask_question(agent_data))
         
 
-    db.clear_db()
+    
 
 if __name__ == "__main__":
-    main()
+    try:
+        db = Qdrant()
+        main(db)
+    except Exception as e:
+        print(f"ERROR: {e}")
+    finally:
+        db.clear_db()

@@ -6,7 +6,7 @@ import os
 
 class StudyPDF():
     def __init__(self, filepath: str):
-        self.name = file_name = os.path.basename(filepath)
+        self.name = os.path.basename(filepath)
         self.chunker = HierarchicalChunker()
         self.converter = DocumentConverter()
         self.doc = self.converter.convert(filepath).document

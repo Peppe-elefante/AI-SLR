@@ -1,0 +1,5 @@
+qdrant_client
+fastembed
+PyPDF2
+google-generativeai
+docling

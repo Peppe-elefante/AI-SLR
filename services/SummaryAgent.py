@@ -22,8 +22,11 @@ class SummaryAgent():
         return response.text
     
     def _make_prompt(self, question, data):
-        return f"""You are an expert researcher performing a comprehensive literature review. Your task is to provide a well-supported answer to the question: '{question}'.
-                Utilize the following collected study data as the basis for your response, focusing on identifying key themes, findings, and any relevant discrepancies or convergences within the information:
+        return f"""You are an expert researcher performing a comprehensive literature review.
+                Your task is to provide a well-supported answer to the question: '{question}'.
+                Utilize the following collected study data as the basis for your response,
+                focusing on identifying key themes, findings, and any relevant discrepancies or convergences within the information.
+                However if the following data isn't able to properly answer the question, don't try to and explain why it can't.
                 **Collected Data:**
                 {data}"""
 

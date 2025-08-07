@@ -21,12 +21,14 @@ class SummaryAgent():
         logging.info("logging response:" + str(response))
         return response.text
     
+    
     def _make_prompt(self, question, data):
         return f"""You are an expert researcher performing a comprehensive literature review.
                 Your task is to provide a well-supported answer to the question: '{question}'.
                 Utilize the following collected study data as the basis for your response,
                 focusing on identifying key themes, findings, and any relevant discrepancies or convergences within the information.
-                However if the following data isn't able to properly answer the question, don't try to and explain why it can't.
+                Remember to cite the studies where the information comes from.
+                If the question is not answerable with the provided data, explain why it cannot be answered.
                 **Collected Data:**
                 {data}"""
 

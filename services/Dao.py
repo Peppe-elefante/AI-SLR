@@ -42,7 +42,7 @@ class Qdrant():
         query=query,
         with_payload=True,
         with_vectors=True,
-        limit=4
+        limit=5
         ).points
 
         return search_result

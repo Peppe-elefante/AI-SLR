@@ -3,4 +3,3 @@ fastembed
 PyPDF2
 google-generativeai
 docling
-sqlite3

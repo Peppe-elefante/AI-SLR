@@ -34,7 +34,7 @@ class StudyPDF():
         """Generator that yields chunk texts without storing all in memory"""
         self._load_if_needed()
         for chunk in self._chunks:
-            if len(chunk.text) > 200:
+            if len(chunk.text) > 275:
                 logging.info(f"Processing chunk: {chunk.text}")
                 yield chunk.text
         

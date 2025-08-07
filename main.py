@@ -6,6 +6,7 @@ from fastembed import TextEmbedding
 from utils.questions import questions
 import logging
 from dotenv import load_dotenv
+import zlib
 
 
 load_dotenv()
@@ -32,16 +33,17 @@ def main(db: Qdrant):
         embeddings = [v[0] for v in embeddings_study.values()]
         embedding_id = [k for k in embeddings_study.keys()]
         db.add_embeddings(dict(zip(embedding_id, embeddings)), study.name)
-        embeddings_dict = embeddings_dict | embeddings_study
+        embeddings_dict = embeddings_dict | {k: (study.name, v[1]) for k, v in embeddings_study.items()}
 
     for question in questions:
         agent_data = {"question" : question}
         answers = []
         query_result = db.query(question, model)
         for point in query_result:
-            answers.append(embeddings_dict.get(point.id)[1])
+            answers.append( "Study name:" + embeddings_dict.get(point.id)[0] 
+                           + "\n Study chunk: " + embeddings_dict.get(point.id)[1])
         agent_data = agent_data | {"answers" : answers}
-        with open("output.txt", "a", encoding="utf-8") as f:
+        with open("output.md", "a", encoding="utf-8") as f:
             f.write("\n\n# Question: "+ question +"\n\n" + agent.ask_question(agent_data))
         
 

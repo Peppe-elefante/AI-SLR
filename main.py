@@ -42,7 +42,7 @@ def main(db: Qdrant):
             answers.append(embeddings_dict.get(point.id)[1])
         agent_data = agent_data | {"answers" : answers}
         with open("output.txt", "a", encoding="utf-8") as f:
-            f.write("\n\nQuestion: "+ question +"\n\n" + agent.ask_question(agent_data))
+            f.write("\n\n# Question: "+ question +"\n\n" + agent.ask_question(agent_data))
         
 
     

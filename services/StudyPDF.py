@@ -34,7 +34,9 @@ class StudyPDF():
         """Generator that yields chunk texts without storing all in memory"""
         self._load_if_needed()
         for chunk in self._chunks:
-            yield chunk.text
+            if len(chunk.text) > 200:
+                logging.info(f"Processing chunk: {chunk.text}")
+                yield chunk.text
         
     def return_embeddings(self, text_model: TextEmbedding):
         chunks = [chunk.text for chunk in self._get_chunk_texts()]
@@ -44,7 +46,7 @@ class StudyPDF():
     
     def return_embeddings(self, text_model: TextEmbedding) -> Dict[int, Tuple[List[float], str]]:
         """
-        Returns a dictionary mapping chunk indices to (embedding, chunk text).
+        Returns a dictionary mapping chunk uuid indices to (embedding, chunk text).
         """
         chunks = list(self._get_chunk_texts())
         embeddings = list(text_model.embed(chunks))
